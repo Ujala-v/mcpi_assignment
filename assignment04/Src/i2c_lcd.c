@@ -2,7 +2,7 @@
  * i2c_lcd.c
  *
  *  Created on: Sep 24, 2024
- *      Author: niralisoni
+ *      Author:sunbeam
  */
 
 #include "i2c_lcd.h"
