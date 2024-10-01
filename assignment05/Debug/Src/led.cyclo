@@ -1,0 +1,5 @@
+../Inc/system_stm32f4xx.h:131:20:DelayMs	2
+../Src/led.c:9:6:LedInit	1
+../Src/led.c:23:6:LedOn	1
+../Src/led.c:28:6:LedOff	1
+../Src/led.c:33:6:LedBlink	1

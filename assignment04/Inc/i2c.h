@@ -1,26 +1,28 @@
 /*
  * i2c.h
  *
- *  Created on: Sep 24, 2024
- *      Author: sunbeam
+ *  Created on: Sep 25, 2024
+ *      Author: spam
  */
 
 #ifndef I2C_H_
 #define I2C_H_
+#include"stm32f4xx.h"
 
-#include "stm32f4xx.h"
+#define GPIO_I2C			GPIOB
 
-#define SCL_PIN			6
-#define SDA_PIN			7
+#define SCL_PIN				6
+#define SDA_PIN				7
 
-void I2C_Init(void);
-void I2C_Start(void);
-void I2C_RepeatStart(void);
-void I2C_Stop(void);
-void I2C_SendSlaveAddr(uint8_t slaveaddr);
-void I2C_SendData(uint8_t data);
-uint16_t I2C_RecvData(void);
-uint16_t I2C_RecvDataNAck(void);
-int I2C_IsDeviceReady(uint8_t slaveaddr);
+void init_i2c(void);
+void i2c_start(void);
+void i2c_stop(void);
+void i2c_repeatstart(void);
+void i2c_sendslaveaddress(uint8_t addr);
+void i2c_senddata(uint8_t data);
+uint16_t i2c_recvdata(void);
+uint16_t i2c_recvdatanack(void);
+int i2c_isdeviceready(uint8_t addr);
+
 
 #endif /* I2C_H_ */

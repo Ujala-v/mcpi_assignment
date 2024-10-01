@@ -15,57 +15,48 @@
  *
  ******************************************************************************
  */
+
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 #include "stm32f4xx.h"
 #include "system_stm32f4xx.h"
-#include "i2c.h"
-#include "i2c_lcd.h"
+
+#include "accel.h"
+#include "uart.h"
+#include "led.h"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-int main(void)
-{
+int main(void) {
+	char str[32];
+	LIS_Data val;
 	SystemInit();
-	//int ret, count;
-	//char str[32];
-	SystemInit();
-	int ret = Lcd_Init();
-	if(ret)
-	{
-		//lcd display shift command
-		while(1){
-		Lcd_WriteByte(LCD_CMD, LCD_DISP_SHIFT_LEFT);
-		Lcd_Puts(LCD_LINE1, "Ujala Kamleshkumar Vaishya");
-		//Lcd_Puts(LCD_LINE2, "STMElectronics STM32F407 CORTEX 5");
+	UartInit(9600);
+	LedInit(LED_RED_PIN);
+	LedInit(LED_BLUE_PIN);
+	UartPuts("LIS3DSH Accel testing when X-axis,Y-axis value some fixed threshold value\r\n");
+	LIS_Init();
+	while(1) {
+		if(LIS_IsDataAvail())
+		{
+			val = LIS_GetData();
+			sprintf(str, "X=%d, Y=%d, Z=%d\r\n", val.x, val.y, val.z);
+			UartPuts(str);
+			if(val.x >= 3000)
+				LedOn(LED_RED_PIN);
+			else if(val.y <= 0)
+				LedOn(LED_BLUE_PIN);
+			else{
+				LedOff(LED_RED_PIN);
+				LedOff(LED_BLUE_PIN);
+			}
+
+
+		}
 		DelayMs(1000);
-		}
-
-		}
-
-
-//		for(count = 1; count<100; count++)
-//		{
-//			sprintf(str, "God Bless me %d", count);
-//			Lcd_Puts(LCD_LINE2, str);
-//			DelayMs(500);
-//		}
-
-
+	}
 	return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
