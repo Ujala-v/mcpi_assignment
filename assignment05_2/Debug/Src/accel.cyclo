@@ -1,0 +1,6 @@
+../Inc/system_stm32f4xx.h:131:20:DelayMs	2
+../Src/accel.c:11:6:SPI_WriteIO	2
+../Src/accel.c:24:6:SPI_ReadIO	2
+../Src/accel.c:39:6:LIS_Init	1
+../Src/accel.c:49:5:LIS_IsDataAvail	2
+../Src/accel.c:60:10:LIS_GetData	1
