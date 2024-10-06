@@ -1,0 +1,2 @@
+../Src/adc.c:9:6:ADCInit	1
+../Src/adc.c:22:10:ADC_On	2
